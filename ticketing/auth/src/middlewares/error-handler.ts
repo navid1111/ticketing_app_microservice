@@ -9,24 +9,12 @@ export const errorHandler = (
   next: NextFunction
 ): void => {
   if (err instanceof RequestValidationError) {
-    const formattedErrors = err.errors.map(error => {
-      return {
-        message: error.msg,
-        field: error
-      };
-    });
-    res.status(400).send({ errors: formattedErrors });
+    res.status(err.statusCode).send({ errors: err.serializeError() });
     return;
   }
 
   if (err instanceof DatabaseConnectionError) {
-    res.status(500).send({
-      errors: [
-        {
-          message: err.reason
-        }
-      ]
-    });
+    res.status(err.statusCode).send({ errors: err.serializeError() });
     return;
   }
 
@@ -34,7 +22,7 @@ export const errorHandler = (
     errors: [
       {
         message: err.message
-    }
+      }
     ]
   });
 };
