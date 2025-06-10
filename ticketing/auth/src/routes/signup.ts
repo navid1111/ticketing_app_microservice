@@ -5,6 +5,7 @@ import { DatabaseConnectionError } from "../errors/database-connection-error";
 import { User } from "../model/user";
 import { BadRequestError } from "../errors/bad-request-error";
 import jwt from "jsonwebtoken";
+import { validateRequest } from "../middlewares/validate-request";
 const router = express.Router();
 router.post(
   "/api/users/signUp",
@@ -17,11 +18,9 @@ router.post(
         "Password must be provided and must be between 4 to 20 characters"
       ),
   ],
+  validateRequest,
   async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      throw new RequestValidationError(errors.array());
-    }
+    
     const { email, password } = req.body;
     const existingUser = await User.findOne({ email });
     if (existingUser) {
