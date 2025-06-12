@@ -1,8 +1,11 @@
 import express from 'express'
 
 const router = express.Router()
-router.get('/api/users/signOut',(req,res)=>{
-    res.send("HELLO THERE")
+router.post('/api/users/signOut',(req,res)=>{
+    req.session=null;
+    res.send({})
+
+    
 
 })
 
