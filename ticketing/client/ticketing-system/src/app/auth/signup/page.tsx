@@ -9,11 +9,21 @@ const SignUp = () => {
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async(event) => {
     event.preventDefault();
-    const response=await axios.post('/api/users/signup',{
-        email,
-        password
-    })
-    console.log(response.data)
+    try {
+        const response=await axios.post('/api/users/signup',{
+            email,
+            password
+        })
+        console.log(response.data)
+        
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          console.log(error.response.data);
+        } else {
+          console.log(error);
+        }
+        
+    }
 
   };
 
