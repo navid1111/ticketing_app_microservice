@@ -16,3 +16,15 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
+    - image: navidkamal/client
+      context: client/ticketing-system  # Updated path
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+          - src: '**/*.tsx'
+            dest: .
+          - src: '**/*.ts'
+            dest: .
