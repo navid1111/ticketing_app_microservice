@@ -1,39 +1,47 @@
-
-"use client"
+"use client";
 import { useState } from "react";
 import axios from "axios";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const onSubmit: React.FormEventHandler<HTMLFormElement> = async(event) => {
+  const [errors, setErrors] = useState<string[]>([]);
+  const onSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
+
     try {
-        const response=await axios.post('/api/users/signup',{
-            email,
-            password
-        })
-        console.log(response.data)
-        
-    } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          console.log(error.response.data);
-        } else {
-          console.log(error);
-        }
-        
+      const response = await axios.post("/api/users/signup", {
+        email,
+        password,
+      });
+      console.log(response.data);
+    } catch (error: any) {
+      console.error("Full error object:", error);
+      console.error("Error response:", error.response);
+
+      if (error.response?.data?.errors) {
+        // Handle structured error response
+        setErrors(error.response.data.errors.map((err: any) => err.message));
+      } else if (error.response?.data?.message) {
+        // Handle single message error
+        setErrors([error.response.data.message]);
+      } else {
+        setErrors(["Something went wrong. Please try again."]);
+      }
     }
-
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">Sign Up</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
+          Sign Up
+        </h1>
         <form className="space-y-4" onSubmit={onSubmit}>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email Address
             </label>
             <input
@@ -46,7 +54,10 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input
