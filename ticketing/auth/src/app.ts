@@ -18,9 +18,6 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.send("hello");
-});
 
 // Register all routes first
 app.use(currentuserRouter);
