@@ -1,6 +1,6 @@
-import { customError } from "./custom-error";
+import { CustomError } from "./custom-error";
 
-export class DatabaseConnectionError extends customError {
+export class DatabaseConnectionError extends CustomError {
   reason = "Error connecting to the database";
   statusCode=500
   constructor() {
@@ -14,6 +14,6 @@ export class DatabaseConnectionError extends customError {
         message: this.reason,
         // field is optional and can be omitted or set to undefined
       }
-    ] as [{ message: string; field?: string | undefined }];
+    ] ;
   }
 }

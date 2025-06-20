@@ -1,6 +1,6 @@
-import { customError } from "./custom-error";
+import { CustomError } from "./custom-error";
 
-export class BadRequestError extends customError{
+export class BadRequestError extends CustomError{
     statusCode =400;
     constructor(public message:string){
         super(message);
@@ -13,6 +13,6 @@ export class BadRequestError extends customError{
         message: this.message,
         // field is optional and can be omitted or set to undefined
       }
-    ] as [{ message: string; field?: string | undefined }];
+    ] ;
   }
 }
