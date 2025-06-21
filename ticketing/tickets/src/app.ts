@@ -2,7 +2,7 @@ import express from "express";
 import { json } from "body-parser";
 
 import "express-async-errors";
-import { errorHandler } from "./middlewares/error-handler";
+import { errorHandler } from "@nksticketss/common";
 import cookieSession from "cookie-session";
 import { createTicketRouter } from "./routes/new";
 const app = express();
