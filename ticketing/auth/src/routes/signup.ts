@@ -1,11 +1,11 @@
 import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
-import { RequestValidationError } from "../errors/request-validation-error";
-import { DatabaseConnectionError } from "../errors/database-connection-error";
+import { RequestValidationError } from "@nksticketss/common";
+import { DatabaseConnectionError } from "@nksticketss/common";
 import { User } from "../model/user";
-import { BadRequestError } from "../errors/bad-request-error";
+import { BadRequestError } from "@nksticketss/common";
 import jwt from "jsonwebtoken";
-import { validateRequest } from "../middlewares/validate-request";
+import { validateRequest } from "@nksticketss/common";
 const router = express.Router();
 router.post(
   "/api/users/signUp",

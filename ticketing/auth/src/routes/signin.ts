@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express'
 import { body, validationResult } from 'express-validator'
-import { RequestValidationError } from '../errors/request-validation-error';
-import { validateRequest } from '../middlewares/validate-request';
+import { RequestValidationError } from "@nksticketss/common";
+import { validateRequest } from "@nksticketss/common";
 import { User } from '../model/user';
-import { BadRequestError } from '../errors/bad-request-error';
+import { BadRequestError } from "@nksticketss/common";
 import { Password } from '../services/password';
 import jwt from "jsonwebtoken";
 import e from 'express';

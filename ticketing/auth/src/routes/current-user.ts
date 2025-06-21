@@ -1,7 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
-import { currentUser } from "../middlewares/current-user";
-import { requireAuth } from "../middlewares/require-auth";
+import { currentUser } from "@nksticketss/common";
+import { requireAuth } from "@nksticketss/common";;
 
 const router = express.Router();
 router.get("/api/users/currentuser",currentUser,requireAuth, (req, res) => {

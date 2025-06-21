@@ -5,7 +5,7 @@ import "express-async-errors";
 import { signInRouter } from "./routes/signin";
 import { signUpRouter } from "./routes/signup";
 import { signOutRouter } from "./routes/signout";
-import { errorHandler } from "./middlewares/error-handler";
+import { errorHandler } from "@nksticketss/common";;
 
 import cookieSession from "cookie-session";
 const app = express();
